@@ -1,0 +1,109 @@
+<!-- Kalkulator Kredit -->
+<div id="kalkulator-kredit">
+    <style> #kalkulator-kredit {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: ligjtcoral;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+#kalkulator-kredit form {
+  display: flex;
+  flex-direction: column;
+}
+
+#kalkulator-kredit label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+#kalkulator-kredit input[type="number"] {
+  width: 100%;
+  height: 35px;
+  font-size: 18px;
+  padding: 0 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+#kalkulator-kredit select {
+  width: 100%;
+  height: 35px;
+  font-size: 18px;
+  padding: 0 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+#kalkulator-kredit input[type="button"] {
+  width: 100%;
+  height: 35px;
+  font-size: 18px;
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#kalkulator-kredit p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#kalkulator-kredit span {
+  font-weight: bold;
+}
+
+<style></style>
+  <form>
+    <label for="jumlah-pinjaman">Masukkan Harga Barang:</label><br>
+    <input type="number" id="jumlah-pinjaman" name="jumlah-pinjaman"><br>
+    <br>
+    <label for="tenor">Pilih Tenor 12, 6 atau 3 bulan:</label><br>
+    <select id="tenor" name="tenor">
+      <option value="12">12 Bulan</option>
+      <option value="6">6 Bulan</option>
+      <option value="3">3 Bulan</option>
+    </select>
+    <br><br>
+    <input type="button" value="Hitung" onclick="hitungKredit()">
+  </form> 
+  <br>
+  <p>Bunga: <span id="bunga"></span></p>
+  <p>Total: <span id="total"></span></p>
+  <p>Pembayaran per bulan: <span id="pembayaran-per-bulan"></span></p>
+</div>
+
+<script>
+  function hitungKredit() {
+    // Ambil input jumlah pinjaman
+    var jumlahPinjaman = document.getElementById("jumlah-pinjaman").value;
+    
+    // Ambil input tenor
+    var tenor = document.getElementById("tenor").value;
+    
+    // Hitung bunga
+    var bunga;
+    if (tenor == 3) {
+      bunga = jumlahPinjaman * 0.03;
+    } else if (tenor == 6) {
+      bunga = jumlahPinjaman * 0.156;
+    } else if (tenor == 12) {
+      bunga = jumlahPinjaman * 0.312;
+    }
+    
+    // Hitung total
+    var total = parseFloat(jumlahPinjaman) + parseFloat(bunga);
+    
+    // Hitung pembayaran per bulan
+    var pembayaranPerBulan = total / tenor;
+    
+    // Bulatkan pembayaran per bulan ke rupiah
+    pembayaranPerBulan = Math.round(pembayaranPerBulan);
+    
+    // Tampilkan hasil
+document.getElementById("bunga").innerHTML = bunga; document.getElementById("total").innerHTML = total; document.getElementById("pembayaran-per-bulan").innerHTML = "Rp. " + pembayaranPerBulan; }
+</script>    
+
